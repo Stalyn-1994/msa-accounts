@@ -5,9 +5,9 @@ CREATE SCHEMA IF NOT EXISTS account;
 CREATE TABLE IF NOT EXISTS account.account
 (
     id             BIGINT AUTO_INCREMENT PRIMARY KEY,
-    accountNumber  VARCHAR(255)             NOT NULL,
+    account_number  VARCHAR(255)             NOT NULL,
     type           VARCHAR(255)             NOT NULL,
-    initialBalance DOUBLE PRECISION,
+    initial_balance DOUBLE PRECISION,
     status         BOOLEAN                           DEFAULT FALSE,
     created_on     TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_on     TIMESTAMP WITH TIME ZONE
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS account.movements
     type          VARCHAR(255)             NOT NULL,
     amount        DOUBLE PRECISION,
     balance       DOUBLE PRECISION,
-    accountNumber BIGINT
+    account_number BIGINT
         CONSTRAINT account_number_id_fk references account.account,
     created_on    TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_on    TIMESTAMP WITH TIME ZONE
