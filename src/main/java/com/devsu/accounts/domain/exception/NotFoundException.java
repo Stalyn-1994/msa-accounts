@@ -10,5 +10,4 @@ import lombok.Setter;
 public class NotFoundException extends RuntimeException {
 
   String message;
-
 }
