@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface AccountRepository extends CrudRepository<AccountEntity, Long> {
 
   Optional<AccountEntity> findAccountEntitiesByAccountNumber(String id);
-  Optional<AccountEntity> findAccountEntityByAccountNumberAndCustomer(String accountNumber,String customer);
+  Optional<AccountEntity> findAccountEntityByAccountNumberAndCustomer(String accountNumber,String customerId);
 }

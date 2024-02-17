@@ -1,5 +1,6 @@
 package com.devsu.accounts.service.impl;
 
+import static com.devsu.accounts.helper.Helper.buildResponseEntity;
 import static com.devsu.accounts.util.Constants.NOT_FOUND;
 
 import com.devsu.accounts.domain.AccountEntity;
@@ -10,13 +11,17 @@ import com.devsu.accounts.repository.MovementRepository;
 import com.devsu.accounts.service.MovementService;
 import com.devsu.accounts.service.dto.request.MovementRequestDto;
 import com.devsu.accounts.service.dto.response.BaseResponseDto;
+import com.devsu.accounts.service.dto.response.MovementResponseDto;
 import com.devsu.accounts.service.mapper.AccountServiceMapper;
-import java.util.Comparator;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import javax.swing.text.html.Option;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -58,10 +63,21 @@ public class MovementServiceImpl implements MovementService {
       movementsEntity.balance(balanceTotal + movementRequestDto.getAmount());
     }
     Long id = movementRepository.save(movementsEntity.build()).getId();
-    return ResponseEntity.ok(BaseResponseDto.builder()
-        .data(id)
-        .build());
+    return
+        buildResponseEntity(id, HttpStatus.CREATED);
+  }
 
+  @Override
+  public ResponseEntity<BaseResponseDto> get(LocalDate initDate, LocalDate endDate,
+      String customer) {
+    List<MovementsEntity> movementsEntities = movementRepository.findByDateBetween(
+        Timestamp.valueOf(initDate.atStartOfDay())
+        , Timestamp.valueOf(endDate.atStartOfDay()));
+    List<MovementResponseDto> movements = movementsEntities.stream().filter(
+            movementsEntity -> movementsEntity.getAccountNumber().getCustomer().equals(customer))
+        .map(accountServiceMapper::toAccountResponseDto).collect(
+            Collectors.toList());
+    return buildResponseEntity(movements, HttpStatus.OK);
   }
 
   @Override
