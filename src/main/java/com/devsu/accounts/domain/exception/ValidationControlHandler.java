@@ -33,7 +33,8 @@ public class ValidationControlHandler extends ResponseEntityExceptionHandler {
         .timeStamp(String.valueOf(new Date(System.currentTimeMillis())))
         .resource(((ServletWebRequest) request).getRequest().getRequestURL().toString())
         .build();
-    return handleExceptionInternal(genericException, errorDto, new HttpHeaders(), genericException.getStatus(),
+    return handleExceptionInternal(genericException, errorDto, new HttpHeaders(),
+        genericException.getStatus(),
         request);
   }
 }

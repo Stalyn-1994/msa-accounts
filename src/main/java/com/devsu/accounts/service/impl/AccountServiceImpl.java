@@ -39,14 +39,15 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public ResponseEntity<BaseResponseDto> update(AccountRequestDto accountResponseDto) {
-    AccountEntity customerEntity = accountRepository
-        .findAccountEntitiesByAccountNumber(accountResponseDto.getAccountNumber())
-        .orElseThrow(() -> new NotFoundException(NOT_FOUND));
-    Long customerId = accountRepository.save(
-        accountServiceMapper.toAccountEntity(accountResponseDto)).getId();
-    return buildResponseEntity(AccountResponseDto.builder()
-        .customerId(String.valueOf(customerId))
-        .build(), HttpStatus.OK);
+//    AccountEntity customerEntity = accountRepository
+//        .findAccountEntitiesByAccountNumber(accountResponseDto.getAccountNumber())
+//        .orElseThrow(() -> new NotFoundException(NOT_FOUND));
+//    Long customerId = accountRepository.save(
+//        accountServiceMapper.toAccountEntity(accountResponseDto)).getId();
+//    return buildResponseEntity(AccountResponseDto.builder()
+//        .customerId(String.valueOf(customerId))
+//        .build(), HttpStatus.OK);
+    return null;
   }
 
   @Override
