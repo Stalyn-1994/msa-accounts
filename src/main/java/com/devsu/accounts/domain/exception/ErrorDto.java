@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ErrorDto {
 
+  int code;
   String message;
   String timeStamp;
   String resource;

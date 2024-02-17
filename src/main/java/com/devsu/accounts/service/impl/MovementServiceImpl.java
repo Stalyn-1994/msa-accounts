@@ -1,10 +1,12 @@
 package com.devsu.accounts.service.impl;
 
 import static com.devsu.accounts.helper.Helper.buildResponseEntity;
+import static com.devsu.accounts.util.Constants.INSUFFICIENT_BALANCE;
 import static com.devsu.accounts.util.Constants.NOT_FOUND;
 
 import com.devsu.accounts.domain.AccountEntity;
 import com.devsu.accounts.domain.MovementsEntity;
+import com.devsu.accounts.domain.exception.GenericException;
 import com.devsu.accounts.domain.exception.NotFoundException;
 import com.devsu.accounts.repository.AccountRepository;
 import com.devsu.accounts.repository.MovementRepository;
@@ -46,25 +48,29 @@ public class MovementServiceImpl implements MovementService {
     } else {
       balanceTotal = account.getInitialBalance();
     }
-    if (balanceTotal <= 0 || movementRequestDto.getType().equals("D")
-        && balanceTotal < movementRequestDto.getAmount()) {
-      return ResponseEntity.ok(BaseResponseDto.builder()
-          .data("Saldo no disponible")
-          .build());
+    if (balanceTotal < 0 || (balanceTotal + movementRequestDto.getAmount()) < 0) {
+      throw new GenericException(HttpStatus.FORBIDDEN, INSUFFICIENT_BALANCE);
     }
     MovementsEntity.MovementsEntityBuilder movementsEntity = MovementsEntity.builder();
     movementsEntity.date(new Date(System.currentTimeMillis()));
-    movementsEntity.type(movementRequestDto.getType());
     movementsEntity.amount(movementRequestDto.getAmount());
+    movementsEntity.type(buildTypeMovement(movementRequestDto.getAmount()));
     movementsEntity.accountNumber(account);
-    if (movementRequestDto.getType().equals("D")) {
-      movementsEntity.balance(balanceTotal - movementRequestDto.getAmount());
-    } else {
-      movementsEntity.balance(balanceTotal + movementRequestDto.getAmount());
-    }
+    movementsEntity.balance(balanceTotal + movementRequestDto.getAmount());
     Long id = movementRepository.save(movementsEntity.build()).getId();
     return
         buildResponseEntity(id, HttpStatus.CREATED);
+  }
+
+  private String buildTypeMovement(double amount) {
+    StringBuilder typeMovement = new StringBuilder();
+    if (amount > 0) {
+      typeMovement.append("Deposit of ");
+    } else {
+      typeMovement.append("Withdrawal of ");
+    }
+    typeMovement.append(amount);
+    return typeMovement.toString();
   }
 
   @Override

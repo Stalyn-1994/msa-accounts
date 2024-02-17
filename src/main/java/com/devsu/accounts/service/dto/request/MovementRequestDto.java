@@ -16,7 +16,6 @@ import lombok.experimental.FieldDefaults;
 public class MovementRequestDto {
 
   Date date;
-  String type;
   double amount;
   String accountNumber;
 }

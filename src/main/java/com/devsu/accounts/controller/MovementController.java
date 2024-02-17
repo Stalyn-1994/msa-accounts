@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/authentication/movement")
+@RequestMapping("api/movements")
 public class MovementController {
 
   final MovementService movementService;
