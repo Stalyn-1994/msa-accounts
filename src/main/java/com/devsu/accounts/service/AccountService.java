@@ -11,7 +11,7 @@ public interface AccountService {
 
   ResponseEntity<BaseResponseDto> update(AccountRequestDto accountResponseDto);
 
-  ResponseEntity<BaseResponseDto> edit(Map<String, Object> customerDto, Long identification);
+  ResponseEntity<BaseResponseDto> edit(Map<String, Object> customerDto, String identification);
 
-  ResponseEntity<BaseResponseDto> delete(Long identification);
+  ResponseEntity<BaseResponseDto> delete(String identification);
 }

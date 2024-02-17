@@ -12,11 +12,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AccountRequestDto {
+public class CustomerRequestDto {
 
-  String type;
-  String customer;
-  String accountNumber;
-  Boolean status;
-  double initialBalance;
+  String identification;
+
 }

@@ -1,5 +1,6 @@
 package com.devsu.accounts.service.dto.request;
 
+import java.util.Date;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,11 +13,10 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AccountRequestDto {
+public class MovementRequestDto {
 
+  Date date;
   String type;
-  String customer;
+  double amount;
   String accountNumber;
-  Boolean status;
-  double initialBalance;
 }

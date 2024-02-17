@@ -21,7 +21,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "account", schema = "account")
-public class AccountEntity {
+public class  AccountEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,8 @@ public class AccountEntity {
   Double initialBalance;
   @Column(name = "status", nullable = false)
   Boolean status = false;
+  @Column(name = "customer", nullable = false)
+  String customer;
   @OneToMany(mappedBy = "accountNumber", fetch = FetchType.LAZY)
   List<MovementsEntity> movements;
 }

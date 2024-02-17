@@ -1,14 +1,13 @@
 package com.devsu.accounts.controller;
 
-import com.devsu.accounts.service.AccountService;
-import com.devsu.accounts.service.dto.request.AccountRequestDto;
+import com.devsu.accounts.service.MovementService;
+import com.devsu.accounts.service.dto.request.MovementRequestDto;
 import com.devsu.accounts.service.dto.response.BaseResponseDto;
 import jakarta.validation.Valid;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,39 +18,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/authentication/account")
-public class AccountController {
+@RequestMapping("api/authentication/movement")
+public class MovementController {
 
-  final AccountService accountService;
+  final MovementService movementService;
 
   @PostMapping("")
   public ResponseEntity<BaseResponseDto> saveAccount(
-      @RequestBody @Valid AccountRequestDto accountRequestDto) {
-    return accountService.save(accountRequestDto);
+      @RequestBody @Valid MovementRequestDto movementRequestDto) {
+    return movementService.save(movementRequestDto);
   }
 
   @PutMapping("")
   public ResponseEntity<BaseResponseDto> updateAccount(
-      @RequestBody @Valid AccountRequestDto accountRequestDto) {
-    return accountService.update(accountRequestDto);
+      @RequestBody @Valid MovementRequestDto MovementRequestDto) {
+    return movementService.update(MovementRequestDto);
   }
 
   @PatchMapping("/{identification}")
   public ResponseEntity<BaseResponseDto> editAccount(
-      @RequestBody Map<String, Object> accountRequestDto, @PathVariable String identification) {
-    return accountService.edit(accountRequestDto, identification);
+      @RequestBody Map<String, Object> MovementRequestDto, @PathVariable Long identification) {
+    return movementService.edit(MovementRequestDto, identification);
   }
-
 
   @DeleteMapping("/{identification}")
   public ResponseEntity<BaseResponseDto> deleteAccount(
-      @PathVariable String identification) {
-    return accountService.delete(identification);
-  }
-
-  @GetMapping("/{identification}")
-  public ResponseEntity<BaseResponseDto> getAccountStatus(
-      @PathVariable String identification) {
-    return accountService.delete(identification);
+      @PathVariable Long identification) {
+    return movementService.delete(identification);
   }
 }

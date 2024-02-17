@@ -32,7 +32,6 @@ public class AccountServiceImpl implements AccountService {
   public ResponseEntity<BaseResponseDto> save(AccountRequestDto accountRequestDto) {
     Long id = accountRepository.save(accountServiceMapper.toAccountEntity(accountRequestDto))
         .getId();
-
     return buildResponseEntity(AccountResponseDto.builder()
         .customerId(String.valueOf(id))
         .build(), HttpStatus.CREATED);
@@ -40,22 +39,20 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public ResponseEntity<BaseResponseDto> update(AccountRequestDto accountResponseDto) {
-    Optional<AccountEntity> customerEntity = accountRepository
-        .findAccountEntitiesById(accountResponseDto.getCustomerId());
-    if (customerEntity.isPresent()) {
-      Long customerId = accountRepository.save(
-          accountServiceMapper.toAccountEntity(accountResponseDto)).getId();
-      return buildResponseEntity(AccountResponseDto.builder()
-          .customerId(String.valueOf(customerId))
-          .build(), HttpStatus.OK);
-    }
-    throw new NotFoundException(NOT_FOUND);
+    AccountEntity customerEntity = accountRepository
+        .findAccountEntitiesByAccountNumber(accountResponseDto.getAccountNumber())
+        .orElseThrow(() -> new NotFoundException(NOT_FOUND));
+    Long customerId = accountRepository.save(
+        accountServiceMapper.toAccountEntity(accountResponseDto)).getId();
+    return buildResponseEntity(AccountResponseDto.builder()
+        .customerId(String.valueOf(customerId))
+        .build(), HttpStatus.OK);
   }
 
   @Override
   public ResponseEntity<BaseResponseDto> edit(Map<String, Object> customerDto,
-      Long identification) {
-    Optional<AccountEntity> customerEntity = accountRepository.findAccountEntitiesById(
+      String identification) {
+    Optional<AccountEntity> customerEntity = accountRepository.findAccountEntitiesByAccountNumber(
         identification);
     if (customerEntity.isPresent()) {
       customerDto.forEach((key, value) -> {
@@ -68,15 +65,14 @@ public class AccountServiceImpl implements AccountService {
       Long customerId = accountRepository.save(customerEntity.get()).getId();
       return buildResponseEntity(AccountResponseDto.builder()
           .customerId(String.valueOf(customerId))
-          .build(), HttpStatus.OK)
-          ;
+          .build(), HttpStatus.OK);
     }
     throw new NotFoundException(NOT_FOUND);
   }
 
   @Override
-  public ResponseEntity<BaseResponseDto> delete(Long identification) {
-    Optional<AccountEntity> customerEntity = accountRepository.findAccountEntitiesById(
+  public ResponseEntity<BaseResponseDto> delete(String identification) {
+    Optional<AccountEntity> customerEntity = accountRepository.findAccountEntitiesByAccountNumber(
         identification);
     if (customerEntity.isPresent()) {
       accountRepository.delete(customerEntity.get());

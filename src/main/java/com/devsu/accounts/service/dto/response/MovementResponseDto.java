@@ -1,4 +1,4 @@
-package com.devsu.accounts.service.dto.request;
+package com.devsu.accounts.service.dto.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,11 +12,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AccountRequestDto {
+public class MovementResponseDto {
 
-  String type;
-  String customer;
-  String accountNumber;
-  Boolean status;
-  double initialBalance;
+  String customerId;
 }
