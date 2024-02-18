@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class KafkaReceiver {
 
+  final ObjectMapper objectMapper;
   final AccountService accountService;
-  final ObjectMapper objectMapper = new ObjectMapper();
 
-  @KafkaListener(topics = "example", groupId = "my-group")
+  @KafkaListener(topics = "example", groupId = "my-group", autoStartup = "${kafka.listener.enabled}")
   public void listen(String message) {
     try {
       AccountRequestDto accountRequestDto = objectMapper.readValue(message,

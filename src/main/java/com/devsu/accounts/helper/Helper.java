@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 public class Helper {
 
-  public static ResponseEntity<BaseResponseDto> buildResponseEntity(Object data,
+  public static ResponseEntity<BaseResponseDto> buildResponseDto(Object data,
       HttpStatus httpStatus) {
     return new ResponseEntity<>(BaseResponseDto.builder()
         .code(httpStatus.value())

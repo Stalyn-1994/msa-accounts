@@ -13,17 +13,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ValidationControlHandler extends ResponseEntityExceptionHandler {
 
-  @ExceptionHandler(value = {NotFoundException.class})
-  protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-    ErrorDto errorDto = ErrorDto.builder()
-        .message(ex.getMessage())
-        .timeStamp(String.valueOf(new Date(System.currentTimeMillis())))
-        .resource(((ServletWebRequest) request).getRequest().getRequestURL().toString())
-        .build();
-    return handleExceptionInternal(ex, errorDto, new HttpHeaders(), HttpStatus.NOT_FOUND,
-        request);
-  }
-
   @ExceptionHandler(value = {GenericException.class})
   protected ResponseEntity<Object> handleConflictGenericException(GenericException genericException,
       WebRequest request) {
@@ -36,5 +25,20 @@ public class ValidationControlHandler extends ResponseEntityExceptionHandler {
     return handleExceptionInternal(genericException, errorDto, new HttpHeaders(),
         genericException.getStatus(),
         request);
+  }
+
+  @ExceptionHandler(value = {InternalErrorException.class})
+  protected ResponseEntity<Object> handleConflictInternalServerError(
+      InternalErrorException genericException,
+      WebRequest request) {
+    ErrorDto errorDto = ErrorDto.builder()
+        .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+        .message(genericException.getMessage())
+        .timeStamp(String.valueOf(new Date(System.currentTimeMillis())))
+        .resource(((ServletWebRequest) request).getRequest().getRequestURL().toString())
+        .build();
+    return handleExceptionInternal(genericException, errorDto, new HttpHeaders()
+        , HttpStatus.INTERNAL_SERVER_ERROR
+        , request);
   }
 }

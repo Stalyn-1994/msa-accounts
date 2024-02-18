@@ -1,16 +1,18 @@
 package com.devsu.accounts.service.impl;
 
-import static com.devsu.accounts.helper.Helper.buildResponseEntity;
+import static com.devsu.accounts.helper.Helper.buildResponseDto;
 import static com.devsu.accounts.util.Constants.NOT_FOUND;
 
 import com.devsu.accounts.domain.AccountEntity;
-import com.devsu.accounts.domain.exception.NotFoundException;
+import com.devsu.accounts.domain.exception.GenericException;
+import com.devsu.accounts.domain.exception.InternalErrorException;
 import com.devsu.accounts.repository.AccountRepository;
 import com.devsu.accounts.service.AccountService;
 import com.devsu.accounts.service.dto.request.AccountRequestDto;
 import com.devsu.accounts.service.dto.response.AccountResponseDto;
 import com.devsu.accounts.service.dto.response.BaseResponseDto;
 import com.devsu.accounts.service.mapper.AccountServiceMapper;
+import jakarta.transaction.Transactional;
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Optional;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
@@ -30,12 +33,16 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public ResponseEntity<BaseResponseDto> save(AccountRequestDto accountRequestDto) {
-    String accountNumber = accountRepository.save(
-            accountServiceMapper.toAccountEntity(accountRequestDto))
-        .getAccountNumber();
-    return buildResponseEntity(AccountResponseDto.builder()
-        .customerId(accountNumber)
-        .build(), HttpStatus.CREATED);
+    try {
+      String accountNumber = accountRepository.save(
+              accountServiceMapper.toAccountEntity(accountRequestDto))
+          .getAccountNumber();
+      return buildResponseDto(AccountResponseDto.builder()
+          .accountNumber(accountNumber)
+          .build(), HttpStatus.CREATED);
+    } catch (Exception exception) {
+      throw new InternalErrorException(exception.getMessage());
+    }
   }
 
   @Override
@@ -65,11 +72,11 @@ public class AccountServiceImpl implements AccountService {
         }
       });
       Long customerId = accountRepository.save(customerEntity.get()).getId();
-      return buildResponseEntity(AccountResponseDto.builder()
-          .customerId(String.valueOf(customerId))
+      return buildResponseDto(AccountResponseDto.builder()
+          .accountNumber(String.valueOf(customerId))
           .build(), HttpStatus.OK);
     }
-    throw new NotFoundException(NOT_FOUND);
+    throw new GenericException(HttpStatus.NOT_FOUND, NOT_FOUND);
   }
 
   @Override
@@ -78,10 +85,10 @@ public class AccountServiceImpl implements AccountService {
         identification);
     if (customerEntity.isPresent()) {
       accountRepository.delete(customerEntity.get());
-      return buildResponseEntity(
-          AccountResponseDto.builder().customerId(String.valueOf(identification)).build(),
+      return buildResponseDto(
+          AccountResponseDto.builder().accountNumber(String.valueOf(identification)).build(),
           HttpStatus.NO_CONTENT);
     }
-    throw new NotFoundException(NOT_FOUND);
+    throw new GenericException(HttpStatus.NOT_FOUND, NOT_FOUND);
   }
 }

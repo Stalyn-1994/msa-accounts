@@ -1,5 +1,14 @@
 spring:
   datasource:
+    hikari:
+      pool-name: Postgresql
+      connectionTimeout: 120000
+      validation-timeout: 50000
+      idleTimeout: 300000
+      maxLifetime: 600000
+      minimum-idle: 3
+      maximum-pool-size: 5
+      leak-detection-threshold: 120000
     url: jdbc:postgresql://localhost:5432/account
     username: postgres
     password: admin
@@ -14,5 +23,7 @@ spring:
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-server:
+kafka:
+  listener:
+    enabled: false
   port: 8095
