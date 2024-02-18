@@ -36,10 +36,11 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     implementation "org.flywaydb:flyway-core"
 
-
     //other
     implementation "org.mapstruct:mapstruct:${mapstruct}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct}"
+    implementation "org.springframework.kafka:spring-kafka:3.1.1"
+
 }
 
 tasks.named('test') {

@@ -9,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum AccountEnum {
 
-  SAVINGS("ahorros"), CURRENT("corriente");
+  SAVINGS("savings"), CURRENT("current");
 
   String name;
 

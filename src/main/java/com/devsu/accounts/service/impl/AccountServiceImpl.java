@@ -30,10 +30,11 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public ResponseEntity<BaseResponseDto> save(AccountRequestDto accountRequestDto) {
-    Long id = accountRepository.save(accountServiceMapper.toAccountEntity(accountRequestDto))
-        .getId();
+    String accountNumber = accountRepository.save(
+            accountServiceMapper.toAccountEntity(accountRequestDto))
+        .getAccountNumber();
     return buildResponseEntity(AccountResponseDto.builder()
-        .customerId(String.valueOf(id))
+        .customerId(accountNumber)
         .build(), HttpStatus.CREATED);
   }
 
