@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS idx_account_id ON account.account(account_number);
