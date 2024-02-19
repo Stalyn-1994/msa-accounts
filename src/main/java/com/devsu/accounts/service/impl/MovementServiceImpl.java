@@ -76,7 +76,6 @@ public class MovementServiceImpl implements MovementService {
     movementsEntity.setType(movementUpdated.getType());
     movementsEntity.setBalance(movementUpdated.getBalance());
     movementsEntity.setAmount(movementUpdated.getAmount());
-    //MovementsEntity idMovement = movementRepository.save(movementsEntity);
     afterEvents = afterEvents.stream()
         .sorted(Comparator.comparing(MovementsEntity::getDate)).collect(Collectors.toList());
     List<MovementsEntity> movementsEntities1 = new ArrayList<>();
