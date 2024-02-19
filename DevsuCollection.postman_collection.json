@@ -1,0 +1,1505 @@
+{
+	"info": {
+		"_postman_id": "bd076e1c-820d-4f89-8e4c-63aa9850ae65",
+		"name": "DevsuCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19235007"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Yacky Agurto\",\r\n    \"gender\": \"F\",\r\n    \"age\": 5,\r\n    \"identification\": \"1723115110\",\r\n    \"address\": \"CB\",\r\n    \"cellphone\": \"+59384453706\",\r\n    \"password\": \"Recre@.25\",\r\n    \"state\": true\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/customer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"customer"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create CustomerBadRequest",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Yacky Agurto\",\r\n    \"gender\": \"F\",\r\n    \"age\": 5,\r\n    \"identification\": \"1723115142\",\r\n    \"address\": \"CB\",\r\n    \"cellphone\": \"+59384453706\",\r\n    \"password\": \"Recre@.25\",\r\n    \"state\": true\r\n    // \"account\": {\r\n    //     \"type\": \"SAVINGS\"\r\n    // }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/customer",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"customer"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 18 Feb 2024 22:09:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Identification already in use\",\n    \"timeStamp\": \"Sun Feb 18 17:09:46 ECT 2024\",\n    \"resource\": \"http://localhost:8080/api/customer\"\n}"
+						},
+						{
+							"name": "Create Customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Yacky Agurto\",\r\n    \"gender\": \"F\",\r\n    \"age\": 5,\r\n    \"identification\": \"1723115110\",\r\n    \"address\": \"CB\",\r\n    \"cellphone\": \"+59384453706\",\r\n    \"password\": \"Recre@.25\",\r\n    \"state\": true\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/customer",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"customer"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 00:44:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"status\": \"Created\",\n    \"data\": {\n        \"customerId\": \"4bb8d9be-bcdb-451f-9591-bec9f3ac4cf9\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Customer With Account Kafka",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Yacky Agurto\",\r\n    \"gender\": \"F\",\r\n    \"age\": 5,\r\n    \"identification\": \"1723115110\",\r\n    \"address\": \"CB\",\r\n    \"cellphone\": \"+59384453706\",\r\n    \"password\": \"Recre@.25\",\r\n    \"state\": true,\r\n     \"account\": {\r\n         \"type\": \"SAVINGS\"\r\n     }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/customer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"customer"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Customer With Account Kafka",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Yacky Agurto\",\r\n    \"gender\": \"F\",\r\n    \"age\": 5,\r\n    \"identification\": \"1723115142\",\r\n    \"address\": \"CB\",\r\n    \"cellphone\": \"+59384453706\",\r\n    \"password\": \"Recre@.25\",\r\n    \"state\": true,\r\n     \"account\": {\r\n         \"type\": \"SAVINGS\"\r\n     }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/customer",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"customer"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 00:52:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"status\": \"Created\",\n    \"data\": {\n        \"customerId\": \"40e8b0da-4609-4252-b57d-3b1785a5b6ce\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Updated Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Yacky Agurto\",\r\n    \"gender\": \"F\",\r\n    \"age\": 94,\r\n    \"identification\": \"1723115110\",\r\n    \"address\": \"SJ\",\r\n    \"cellphone\": \"+59384453776\",\r\n    \"password\": \"Recre@.25\"    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/customer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"customer"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdatedNotFound",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Yacky Agurto\",\r\n    \"gender\": \"F\",\r\n    \"age\": 94,\r\n    \"identification\": \"1723115110\",\r\n    \"address\": \"SJ\",\r\n    \"cellphone\": \"+59384453776\",\r\n    \"password\": \"Recre@.25\"    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/customer",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"customer"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 00:56:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Element doesn't found\",\n    \"timeStamp\": \"Sun Feb 18 19:56:38 ECT 2024\",\n    \"resource\": \"http://localhost:8080/api/customer\"\n}"
+						},
+						{
+							"name": "Updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Yacky Agurto\",\r\n    \"gender\": \"F\",\r\n    \"age\": 94,\r\n    \"identification\": \"1723115110\",\r\n    \"address\": \"SJ\",\r\n    \"cellphone\": \"+593844537976\",\r\n    \"password\": \"Recrea@.25\",\r\n    \"customerId\": \"4bb8d9be-bcdb-451f-9591-bec9f3ac4cf9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/customer",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"customer"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 00:59:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": \"OK\",\n    \"data\": {\n        \"customerId\": \"4bb8d9be-bcdb-451f-9591-bec9f3ac4cf9\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Customer",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Zack Agurto\",        \r\n    \"identification\": \"1723115110\",    \r\n    \"cellphone\": \"+593844537976\",\r\n    \"password\": \"Recrea@.26\"    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/customer/4bb8d9be-bcdb-451f-9591-bec9f3ac4cf9",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"customer",
+								"4bb8d9be-bcdb-451f-9591-bec9f3ac4cf9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Customer",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Zack Agurto\",        \r\n    \"identification\": \"1723115110\",    \r\n    \"cellphone\": \"+593844537976\",\r\n    \"password\": \"Recrea@.26\"    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/customer/4bb8d9be-bcdb-451f-9591-bec9f3ac4cf9",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"customer",
+										"4bb8d9be-bcdb-451f-9591-bec9f3ac4cf9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:01:24 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": \"OK\",\n    \"data\": {\n        \"customerId\": \"4bb8d9be-bcdb-451f-9591-bec9f3ac4cf9\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/customer/40e8b0da-4609-4252-b57d-3b1785a5b6ce",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"customer",
+								"40e8b0da-4609-4252-b57d-3b1785a5b6ce"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Customer",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/customer/40e8b0da-4609-4252-b57d-3b1785a5b6ce",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"customer",
+										"40e8b0da-4609-4252-b57d-3b1785a5b6ce"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:02:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Element doesn't found\",\n    \"timeStamp\": \"Sun Feb 18 20:02:51 ECT 2024\",\n    \"resource\": \"http://localhost:8080/api/customer/4bb8d9be-bcdb-451f-9591-bec9f3ac4cf9\"\n}"
+						},
+						{
+							"name": "Delete CustomerFounded",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/customer/40e8b0da-4609-4252-b57d-3b1785a5b6ce",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"customer",
+										"40e8b0da-4609-4252-b57d-3b1785a5b6ce"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:03:52 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"CURRENT\",\r\n    \"name\":\"Izack Guairacaja\",\r\n    \"status\":true,\r\n    \"initialBalance\":100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8095/api/account",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"account"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\":\"CURRENT\",\r\n    \"name\":\"Izack Guairacaja\",\r\n    \"status\":true,\r\n    \"initialBalance\":100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8095/api/account",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"account"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:08:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"status\": \"Created\",\n    \"data\": {\n        \"accountNumber\": \"5154124354791687415\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Account BadRequest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"any\",\r\n    \"name\":\"Izack Guairacaja\",\r\n    \"status\":true,\r\n    \"initialBalance\":100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8095/api/account",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"account"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\":\"CURRENT\",\r\n    \"name\":\"Izack Guairacaja\",\r\n    \"status\":true,\r\n    \"initialBalance\":100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8095/api/account",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"account"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:08:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"status\": \"Created\",\n    \"data\": {\n        \"accountNumber\": \"5154124354791687415\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Account ",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"SAVINGS\",\r\n    \"name\":\"Izack Vasconez\",\r\n    \"status\":true,\r\n    \"initialBalance\":100,\r\n    \"accountNumber\":\"5980167281055302833\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8095/api/account",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"account"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\":\"CURRENT\",\r\n    \"name\":\"Izack Guairacaja\",\r\n    \"status\":true,\r\n    \"initialBalance\":100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8095/api/account",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"account"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:08:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"status\": \"Created\",\n    \"data\": {\n        \"accountNumber\": \"5154124354791687415\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Account ",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"SAVINGS\",\r\n    \"name\":\"Izack Guairacja\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8095/api/account/5980167281055302833",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"account",
+								"5980167281055302833"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Account",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\":\"SAVINGS\",\r\n    \"name\":\"Izack Guairacja\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8095/api/account/5980167281055302833",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"account",
+										"5980167281055302833"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:14:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": \"OK\",\n    \"data\": {\n        \"accountNumber\": \"5980167281055302833\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Account with movements",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8095/api/account/5980167281055302833",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"account",
+								"5980167281055302833"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Account",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\":\"SAVINGS\",\r\n    \"name\":\"Izack Guairacja\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8095/api/account/5980167281055302833",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"account",
+										"5980167281055302833"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:14:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": \"OK\",\n    \"data\": {\n        \"accountNumber\": \"5980167281055302833\"\n    }\n}"
+						},
+						{
+							"name": "Delete Account",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8095/api/account/5154124354791687415",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"account",
+										"5154124354791687415"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:16:17 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Movements",
+			"item": [
+				{
+					"name": "Update ",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2024-02-16\",    \r\n    \"amount\": 300,\r\n    \"accountNumber\": \"5980167281055302833\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8095/api/movements/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"movements",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"date\": \"2024-02-16\",    \r\n    \"amount\": 300,\r\n    \"accountNumber\": \"5980167281055302833\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8095/api/movements/5",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"movements",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 00:25:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": \"OK\",\n    \"data\": {\n        \"accountNumber\": \"5\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Movements",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"amount\": 300,\r\n    \"accountNumber\": \"5980167281055302833\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8095/api/movements",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"movements"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateMovement",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \r\n    \"amount\": 300,\r\n    \"accountNumber\": \"5980167281055302833\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8095/api/movements",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"movements"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:20:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"status\": \"Created\",\n    \"data\": 19\n}"
+						},
+						{
+							"name": "Insuficience",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \r\n    \"amount\": -10000,\r\n    \"accountNumber\": \"5980167281055302833\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8095/api/movements",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"movements"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:22:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"insufficient balance\",\n    \"timeStamp\": \"Sun Feb 18 20:22:26 ECT 2024\",\n    \"resource\": \"http://localhost:8095/api/movements\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Movements",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8095/api/movements/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"movements",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Movements",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8095/api/movements/5",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"movements",
+										"5"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:24:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Edit Movements",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 200.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8095/api/movements/22",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"movements",
+								"22"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Movements",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount\": 200.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8095/api/movements/22",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"movements",
+										"22"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 01:26:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": \"OK\",\n    \"data\": {\n        \"accountNumber\": \"22\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Reports",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2024-02-16\",\r\n    \"type\": \"D\",\r\n    \"amount\": 12.50,\r\n    \"accountNumber\": \"2220156899\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/reports?dateInit=2024-02-15&dateEnd=2024-02-18&customer=Luis Alberto",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reports"
+							],
+							"query": [
+								{
+									"key": "dateInit",
+									"value": "2024-02-15"
+								},
+								{
+									"key": "dateEnd",
+									"value": "2024-02-18"
+								},
+								{
+									"key": "customer",
+									"value": "Luis Alberto"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Reports",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"date\": \"2024-02-16\",\r\n    \"type\": \"D\",\r\n    \"amount\": 12.50,\r\n    \"accountNumber\": \"2220156899\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/reports?dateInit=2024-02-15&dateEnd=2024-02-18&customer=Luis Alberto",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"reports"
+									],
+									"query": [
+										{
+											"key": "dateInit",
+											"value": "2024-02-15"
+										},
+										{
+											"key": "dateEnd",
+											"value": "2024-02-18"
+										},
+										{
+											"key": "customer",
+											"value": "Luis Alberto"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 19:22:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": \"OK\",\n    \"data\": [\n        {\n            \"date\": \"2024-02-17T19:18:37.476+00:00\",\n            \"customer\": \"Luis Alberto\",\n            \"accountNumber\": \"2220156899\",\n            \"type\": \"Savings\",\n            \"initialBalance\": 100,\n            \"status\": true,\n            \"amount\": -50,\n            \"balance\": 50\n        },\n        {\n            \"date\": \"2024-02-17T19:19:22.809+00:00\",\n            \"customer\": \"Luis Alberto\",\n            \"accountNumber\": \"2220156899\",\n            \"type\": \"Savings\",\n            \"initialBalance\": 100,\n            \"status\": true,\n            \"amount\": -50,\n            \"balance\": 0\n        },\n        {\n            \"date\": \"2024-02-17T19:22:09.166+00:00\",\n            \"customer\": \"Luis Alberto\",\n            \"accountNumber\": \"2220156899\",\n            \"type\": \"Savings\",\n            \"initialBalance\": 100,\n            \"status\": true,\n            \"amount\": 50,\n            \"balance\": 50\n        },\n        {\n            \"date\": \"2024-02-17T19:22:16.546+00:00\",\n            \"customer\": \"Luis Alberto\",\n            \"accountNumber\": \"2220156899\",\n            \"type\": \"Savings\",\n            \"initialBalance\": 100,\n            \"status\": true,\n            \"amount\": -20,\n            \"balance\": 30\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
