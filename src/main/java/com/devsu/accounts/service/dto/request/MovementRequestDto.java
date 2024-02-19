@@ -15,7 +15,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MovementRequestDto {
 
-  Date date;
   double amount;
   String accountNumber;
 }

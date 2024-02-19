@@ -70,9 +70,9 @@ public class AccountServiceImpl implements AccountService {
         ReflectionUtils.setField(field, accountEntity, value);
       }
     });
-    Long customerId = accountRepository.save(accountEntity).getId();
+    accountRepository.save(accountEntity);
     return buildResponseDto(AccountResponseDto.builder()
-        .accountNumber(String.valueOf(customerId))
+        .accountNumber(accountNumber)
         .build(), HttpStatus.OK);
   }
 

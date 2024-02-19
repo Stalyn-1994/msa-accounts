@@ -31,8 +31,8 @@ public class MovementController {
 
   @PutMapping("/{id}")
   public ResponseEntity<BaseResponseDto> updateAccount(
-      @RequestBody @Valid MovementRequestDto MovementRequestDto,@PathVariable Long id) {
-    return movementService.update(MovementRequestDto,id);
+      @RequestBody @Valid MovementRequestDto movementRequestDto,@PathVariable Long id) {
+    return movementService.update(movementRequestDto,id);
   }
 
   @PatchMapping("/{identification}")
