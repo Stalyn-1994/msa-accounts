@@ -1,6 +1,7 @@
 package com.devsu.accounts.service.impl;
 
 import static com.devsu.accounts.helper.Helper.buildResponseDto;
+import static com.devsu.accounts.util.Constants.ACCOUNT_WITH_MOVEMENTS;
 import static com.devsu.accounts.util.Constants.NOT_FOUND;
 
 import com.devsu.accounts.domain.AccountEntity;
@@ -15,7 +16,6 @@ import com.devsu.accounts.service.mapper.AccountServiceMapper;
 import jakarta.transaction.Transactional;
 import java.lang.reflect.Field;
 import java.util.Map;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,48 +47,43 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public ResponseEntity<BaseResponseDto> update(AccountRequestDto accountResponseDto) {
-//    AccountEntity customerEntity = accountRepository
-//        .findAccountEntitiesByAccountNumber(accountResponseDto.getAccountNumber())
-//        .orElseThrow(() -> new NotFoundException(NOT_FOUND));
-//    Long customerId = accountRepository.save(
-//        accountServiceMapper.toAccountEntity(accountResponseDto)).getId();
-//    return buildResponseEntity(AccountResponseDto.builder()
-//        .customerId(String.valueOf(customerId))
-//        .build(), HttpStatus.OK);
-    return null;
+    AccountEntity customerEntity = accountRepository
+        .findAccountEntitiesByAccountNumber(accountResponseDto.getAccountNumber())
+        .orElseThrow(() -> new GenericException(HttpStatus.NOT_FOUND, NOT_FOUND));
+    String accountNumber = accountRepository.save(
+            accountServiceMapper.toAccountEntityUpdated(accountResponseDto, customerEntity.getId()))
+        .getAccountNumber();
+    return buildResponseDto(AccountResponseDto.builder()
+        .accountNumber(String.valueOf(accountNumber))
+        .build(), HttpStatus.OK);
   }
 
   @Override
-  public ResponseEntity<BaseResponseDto> edit(Map<String, Object> customerDto,
-      String identification) {
-    Optional<AccountEntity> customerEntity = accountRepository.findAccountEntitiesByAccountNumber(
-        identification);
-    if (customerEntity.isPresent()) {
-      customerDto.forEach((key, value) -> {
-        Field field = ReflectionUtils.findField(AccountEntity.class, key);
-        if (field != null) {
-          field.setAccessible(true);
-          ReflectionUtils.setField(field, customerEntity.get(), value);
-        }
-      });
-      Long customerId = accountRepository.save(customerEntity.get()).getId();
-      return buildResponseDto(AccountResponseDto.builder()
-          .accountNumber(String.valueOf(customerId))
-          .build(), HttpStatus.OK);
-    }
-    throw new GenericException(HttpStatus.NOT_FOUND, NOT_FOUND);
+  public ResponseEntity<BaseResponseDto> edit(Map<String, Object> accountFields,
+      String accountNumber) {
+    AccountEntity accountEntity = accountRepository.findAccountEntitiesByAccountNumber(
+        accountNumber).orElseThrow(() -> new GenericException(HttpStatus.NOT_FOUND, NOT_FOUND));
+    accountFields.forEach((key, value) -> {
+      Field field = ReflectionUtils.findField(AccountEntity.class, key);
+      if (field != null) {
+        field.setAccessible(true);
+        ReflectionUtils.setField(field, accountEntity, value);
+      }
+    });
+    Long customerId = accountRepository.save(accountEntity).getId();
+    return buildResponseDto(AccountResponseDto.builder()
+        .accountNumber(String.valueOf(customerId))
+        .build(), HttpStatus.OK);
   }
 
   @Override
-  public ResponseEntity<BaseResponseDto> delete(String identification) {
-    Optional<AccountEntity> customerEntity = accountRepository.findAccountEntitiesByAccountNumber(
-        identification);
-    if (customerEntity.isPresent()) {
-      accountRepository.delete(customerEntity.get());
-      return buildResponseDto(
-          AccountResponseDto.builder().accountNumber(String.valueOf(identification)).build(),
-          HttpStatus.NO_CONTENT);
+  public ResponseEntity<BaseResponseDto> delete(String accountNumber) {
+    AccountEntity accountEntity = accountRepository.findAccountEntitiesByAccountNumber(
+        accountNumber).orElseThrow(() -> new GenericException(HttpStatus.NOT_FOUND, NOT_FOUND));
+    if (accountEntity.getMovements().isEmpty()) {
+      accountRepository.delete(accountEntity);
+      return ResponseEntity.noContent().build();
     }
-    throw new GenericException(HttpStatus.NOT_FOUND, NOT_FOUND);
+    throw new GenericException(HttpStatus.BAD_REQUEST, ACCOUNT_WITH_MOVEMENTS);
   }
 }

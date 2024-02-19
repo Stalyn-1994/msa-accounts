@@ -11,11 +11,13 @@ import jakarta.persistence.Table;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Data
+@Builder
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,7 +28,7 @@ public class AccountEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
-  @Column(name = "account_number", nullable = false, length = 255)
+  @Column(name = "account_number", nullable = false, length = 255, unique = true)
   String accountNumber;
   @Column(name = "type", nullable = false, length = 255)
   String type;

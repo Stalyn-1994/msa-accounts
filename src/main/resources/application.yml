@@ -26,4 +26,6 @@ spring:
 kafka:
   listener:
     enabled: false
+
+server:
   port: 8095

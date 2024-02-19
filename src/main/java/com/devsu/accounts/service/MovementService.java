@@ -14,7 +14,7 @@ public interface MovementService {
 
   ResponseEntity<BaseResponseDto> get(LocalDate initDate, LocalDate endDate, String customer);
 
-  ResponseEntity<BaseResponseDto> update(MovementRequestDto movementRequestDto);
+  ResponseEntity<BaseResponseDto> update(MovementRequestDto movementRequestDto,Long id);
 
   ResponseEntity<BaseResponseDto> edit(Map<String, Object> customerDto, Long identification);
 

@@ -29,10 +29,10 @@ public class MovementController {
     return movementService.save(movementRequestDto);
   }
 
-  @PutMapping("")
+  @PutMapping("/{id}")
   public ResponseEntity<BaseResponseDto> updateAccount(
-      @RequestBody @Valid MovementRequestDto MovementRequestDto) {
-    return movementService.update(MovementRequestDto);
+      @RequestBody @Valid MovementRequestDto MovementRequestDto,@PathVariable Long id) {
+    return movementService.update(MovementRequestDto,id);
   }
 
   @PatchMapping("/{identification}")

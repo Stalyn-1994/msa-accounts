@@ -8,7 +8,6 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,12 +44,6 @@ public class AccountController {
 
   @DeleteMapping("/{identification}")
   public ResponseEntity<BaseResponseDto> deleteAccount(
-      @PathVariable String identification) {
-    return accountService.delete(identification);
-  }
-
-  @GetMapping("/{identification}")
-  public ResponseEntity<BaseResponseDto> getAccountStatus(
       @PathVariable String identification) {
     return accountService.delete(identification);
   }

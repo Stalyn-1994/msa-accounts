@@ -27,4 +27,5 @@ public class AccountRequestDto {
   Boolean status = false;
   @Builder.Default
   double initialBalance = 0.0;
+  String accountNumber;
 }
