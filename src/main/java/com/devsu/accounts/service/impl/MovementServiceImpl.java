@@ -60,36 +60,33 @@ public class MovementServiceImpl implements MovementService {
         .findById(id)
         .orElseThrow(() -> new GenericException(HttpStatus.NOT_FOUND, NOT_FOUND));
     List<MovementsEntity> movementsEntities = movementsEntity.getAccountNumber().getMovements();
-    List<MovementsEntity> beforeEvents = movementsEntities.stream()
+    List<MovementsEntity> beforeDate = movementsEntities.stream()
         .filter(e -> e.getDate().before(movementsEntity.getDate()))
         .toList();
-    AccountEntity accountEntity = AccountEntity.builder().movements(beforeEvents).build();
-    List<MovementsEntity> afterEvents = movementsEntities.stream()
+    List<MovementsEntity> afterDates = movementsEntities.stream()
         .filter(e -> e.getDate().after(movementsEntity.getDate()) || e.getDate()
             .equals(movementsEntity.getDate()))
         .toList();
-    double balanceTotal = movementServiceMapper.calculateBalanceTotal(
-        accountEntity);
+    double balanceTotal = movementServiceMapper.calculateBalanceTotal(AccountEntity.builder().movements(beforeDate).build());
     MovementsEntity movementUpdated = movementServiceMapper.buildMoveEntity(movementRequestDto
         , balanceTotal
         , movementsEntity.getAccountNumber());
     movementsEntity.setType(movementUpdated.getType());
     movementsEntity.setBalance(movementUpdated.getBalance());
     movementsEntity.setAmount(movementUpdated.getAmount());
-    afterEvents = afterEvents.stream()
+    afterDates = afterDates.stream()
         .sorted(Comparator.comparing(MovementsEntity::getDate)).collect(Collectors.toList());
-    List<MovementsEntity> movementsEntities1 = new ArrayList<>();
-    for (int i = 0; i < afterEvents.size() - 1; i++) {
-      MovementsEntity movements = afterEvents.get(i + 1);
-      movements.setBalance(movements.getAmount() + afterEvents.get(i).getBalance());
-      movementsEntities1.add(movements);
+    List<MovementsEntity> movementsUpdates = new ArrayList<>();
+    for (int i = 0; i < afterDates.size() - 1; i++) {
+      MovementsEntity movements = afterDates.get(i + 1);
+      movements.setBalance(movements.getAmount() + afterDates.get(i).getBalance());
+      movementsUpdates.add(movements);
     }
-    movementsEntities1.add(movementsEntity);
-    movementRepository.saveAll(movementsEntities1);
+    movementsUpdates.add(movementsEntity);
+    movementRepository.saveAll(movementsUpdates);
     return buildResponseDto(AccountResponseDto.builder()
         .accountNumber(String.valueOf(id))
         .build(), HttpStatus.OK);
-
   }
 
   @Override
